@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Gold & Bullion Trading Desk</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:radial-gradient(circle at top,#0b0b0b,#050505);
+    color:#fff;
+}
+
+header{
+    text-align:center;
+    padding:50px 20px 20px;
+}
+
+h1{color:gold;font-size:38px;letter-spacing:1px;}
+.subtitle{color:#ccc;max-width:900px;margin:10px auto;line-height:1.6;}
+
+.lang-switch button,.cur-switch button{
+    margin:4px;
+    padding:8px 12px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:#1a1a1a;
+    color:#fff;
+    border:1px solid rgba(255,215,0,0.2);
+}
+.lang-switch button:hover,.cur-switch button:hover{background:gold;color:#000;}
+
+.container{padding:20px;}
+
+.card{
+    background:linear-gradient(145deg,#0f0f0f,#141414);
+    max-width:950px;
+    margin:20px auto;
+    padding:25px;
+    border-radius:16px;
+    border:1px solid rgba(255,215,0,0.15);
+}
+
+h2{color:gold;}
+p{color:#ddd;line-height:1.6;}
+
+.counter{font-size:46px;color:gold;text-align:center;font-weight:bold;}
+.small{text-align:center;color:#aaa;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+.badge{background:#1a1a1a;padding:10px;border-radius:10px;text-align:center;border:1px solid rgba(255,215,0,0.15);}
+
+.feed-item{background:#0b0b0b;padding:10px;margin-top:8px;border-left:3px solid gold;border-radius:6px;color:#ccc;}
+
+.btn{display:inline-block;margin-top:15px;padding:14px 30px;background:gold;color:#000;font-weight:bold;text-decoration:none;border-radius:10px;}
+
+.popup{position:fixed;bottom:20px;right:20px;background:#25D366;padding:14px 18px;border-radius:50px;font-weight:bold;color:white;text-decoration:none;}
+
+.price-box{font-size:22px;color:gold;text-align:center;margin-top:10px;}
+
+.chart-card{
+    background:linear-gradient(145deg,#0f0f0f,#141414);
+    max-width:950px;
+    margin:20px auto;
+    padding:25px;
+    border-radius:16px;
+    border:1px solid rgba(255,215,0,0.15);
+}
+
+</style></head><body><header>
+<h1>INTERNATIONAL GOLD & BULLION DESK</h1>
+<p class="subtitle">Real-time gold trading intelligence with global coverage.</p><div class="lang-switch">
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('fr')">FR</button>
+<button onclick="setLang('es')">ES</button>
+<button onclick="setLang('ar')">AR</button>
+</div><div class="cur-switch">
+<button onclick="setCurrency('USD')">USD</button>
+<button onclick="setCurrency('EUR')">EUR</button>
+<button onclick="setCurrency('XOF')">XOF</button>
+</div>
+</header><div class="container"><div class="card">
+<h2>📊 Live Transactions</h2>
+<div class="counter" id="counter">12840</div>
+<p class="small">Real-time global bullion activity</p>
+</div><div class="card">
+<h2>💰 Gold Spot Price</h2>
+<div class="price-box" id="goldPrice">Loading...</div>
+</div><!-- BLOOMBERG STYLE CHART --><div class="chart-card">
+<h2>📈 Gold Price (Bloomberg Style Chart)</h2>
+<canvas id="goldChart"></canvas>
+</div><div class="card">
+<h2>🏛️ Company Registration Certificate</h2>
+<div class="cert">
+<strong>Registered Entity:</strong> International Gold & Bullion Trading Desk<br>
+<strong>Registration Number:</strong> GH-ACC-2016-784512<br>
+<strong>Head Office:</strong> Accra Financial District, Ghana<br>
+<strong>Status:</strong> Active International Trading Entity
+</div>
+</div><div class="card">
+<h2>⭐ Client Testimonials</h2>
+<div class="testimonial">"Professional communication and structured execution process." — Europe Client</div>
+<div class="testimonial">"Reliable and transparent verification workflow." — UAE Partner</div>
+<div class="testimonial">"Strong institutional trading structure and coordination." — UK Investor</div>
+</div><div class="card">
+<h2>🌍 Global Network</h2>
+<div class="grid">
+<div class="badge">Ghana</div>
+<div class="badge">Mali</div>
+<div class="badge">Kenya</div>
+<div class="badge">Dubai</div>
+<div class="badge">Zurich</div>
+<div class="badge">London</div>
+</div>
+</div><div class="card">
+<h2>📞 Direct Contact</h2>
+<a class="btn" href="https://wa.me/233539575538">WhatsApp</a>
+</div></div><a class="popup" href="https://wa.me/233539575538">💬 Live Chat</a>
+
+<script>
+
+let counter=12840;
+setInterval(()=>{
+ counter+=Math.floor(Math.random()*7)+1;
+ document.getElementById("counter").innerText=counter.toLocaleString();
+},1200);
+
+// PRICE
+let base=2050;
+let currency="USD";
+function setCurrency(c){currency=c;updatePrice();}
+function updatePrice(){
+ let rate=1;
+ if(currency=="EUR") rate=0.92;
+ if(currency=="XOF") rate=600;
+ document.getElementById("goldPrice").innerText=(base*rate).toFixed(2)+" "+currency+" / oz";
+}
+setInterval(()=>{base+=Math.random()*2-1;updatePrice();},3000);
+updatePrice();
+
+// BLOOMBERG STYLE CHART
+const ctx=document.getElementById('goldChart');
+const goldChart=new Chart(ctx,{
+ type:'line',
+ data:{
+  labels:Array.from({length:20},(_,i)=>i+1),
+  datasets:[{
+    label:'Gold Price',
+    data:Array.from({length:20},()=>2050+Math.random()*20),
+    borderColor:'gold',
+    backgroundColor:'rgba(255,215,0,0.1)',
+    tension:0.4,
+    fill:true
+  }]
+ },
+ options:{
+  responsive:true,
+  plugins:{legend:{labels:{color:'#fff'}}},
+  scales:{
+    x:{ticks:{color:'#aaa'}},
+    y:{ticks:{color:'#aaa'}}
+  }
+ }
+});
+
+</script></body>
+</html>
